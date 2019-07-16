@@ -1,0 +1,15 @@
+﻿*.txt
+*.csproj
+*.sln
+*.config
+/bin
+/bin/*
+/bin/**
+/obj/**
+/packages
+/packages/**
+/Properties
+/Properties/**
+/.vs
+/.vs/**
+.config
