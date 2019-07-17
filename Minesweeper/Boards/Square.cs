@@ -5,18 +5,18 @@ namespace MinesweeperWF.Minesweeper.Boards
 {
     class Square : IBoard
     {
-        public void Fill(int y, int x, Cell[,] board, int countOfBombs)
+        public void Fill(Cell[,] board)
         {
-            for (int cols = 0; cols < y; cols++)
+            for (int cols = 0; cols < Settings.Y; cols++)
             {
-                for (int rows = 0; rows < x; rows++)
+                for (int rows = 0; rows < Settings.X; rows++)
                 {
                     board[cols, rows] = new Cell(rows, cols);
                     board[cols, rows].SetValue(Value.Empty);
                     board[cols, rows].SetState(State.Closed);
                 }
             }
-            PlaceBombs(board, countOfBombs);
+            PlaceBombs(board, Settings.CountOfBombs);
         }
 
         private void PlaceBombs(Cell[,] board, int countOfBombs)
@@ -69,7 +69,7 @@ namespace MinesweeperWF.Minesweeper.Boards
             int biasX; //bias - смещённый
             int biasY;
 
-            //TODO: модумать, можно ли как-то это упростить:
+            //TODO: подумать, можно ли как-то это упростить:
             //Left
             biasX = X - radius;
             biasY = Y;

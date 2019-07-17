@@ -18,9 +18,9 @@ namespace MinesweeperWF.Minesweeper
             return Strategy.GetNeighboringCells(cell, board);
         }
 
-        public void Fill(int Y, int X, Cell[,] board, int countOfBombs)
+        public void Fill(Cell[,] board)
         {
-            Strategy.Fill(Y, X, board, countOfBombs);
+            Strategy.Fill(board);
         }
     }
 }

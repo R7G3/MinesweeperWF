@@ -103,19 +103,7 @@ namespace MinesweeperWF
             {
                 game.Open(coordX, coordY);
                 UpdateField(game.mineField.board);
-
-                if (game.isGameOver)
-                {
-                    MessageBox.Show("You loose!");
-                    foreach (Button b in buttons)
-                    {
-                        b.Enabled = false;
-                    }
-                }
-                if (game.CheckWin())
-                {
-                    MessageBox.Show("You win!");
-                }
+                WinLooseVerification();
             }
             else if (e.Button == MouseButtons.Right)
             {
@@ -133,6 +121,28 @@ namespace MinesweeperWF
                     + "\nNeighb. bombs: \t"  + cell.CountOfNeighboringBombs.ToString()
                     + "\nCoords: \t\t"       + cell.X + ", " + cell.Y
                 );
+            }
+        }
+
+        private void BlockGameButtons()
+        {
+            foreach (Button b in buttons)
+            {
+                b.Enabled = false;
+            }
+        }
+
+        private void WinLooseVerification()
+        {
+            if (game.CheckWin())
+            {
+                MessageBox.Show("You win!");
+                BlockGameButtons();
+            }
+            if (game.isGameOver)
+            {
+                MessageBox.Show("You loose!");
+                BlockGameButtons();
             }
         }
 
