@@ -28,7 +28,7 @@ namespace MinesweeperWF.Minesweeper.Boards
                 Random rand = new Random();
                 int y = rand.Next(0, board.GetLength(0) - 1);
                 int x = rand.Next(0, board.GetLength(1) - 1);
-                if (board[y, x].value != Value.Bomb)
+                if (board[y, x].GetValue() != Value.Bomb)
                 {
                     board[y, x].SetValue(Value.Bomb);
                     board[y, x].SetState(State.Closed);
@@ -39,7 +39,7 @@ namespace MinesweeperWF.Minesweeper.Boards
             }
             foreach (Cell cell in cellsNeighboringBombs)
             {
-                if (cell.value != Value.Bomb)
+                if (cell.GetValue() != Value.Bomb)
                 {
                     cell.SetValue(Value.Number);
                     cell.CountOfNeighboringBombs++;

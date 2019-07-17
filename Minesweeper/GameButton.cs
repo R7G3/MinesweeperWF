@@ -2,12 +2,12 @@
 
 namespace MinesweeperWF
 {
-    public partial class GameButton : Button
+    internal partial class GameButton : Button
     {
-        public int coordX;
-        public int coordY;
+        internal int coordX;
+        internal int coordY;
 
-        public GameButton(int col, int row)
+        internal GameButton(int col, int row)
         {
             coordX = col;
             coordY = row;

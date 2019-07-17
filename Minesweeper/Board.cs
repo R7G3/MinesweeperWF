@@ -7,9 +7,6 @@ namespace MinesweeperWF.Minesweeper
         private IBoard Strategy { get; set; }
         public Cell[,] board;
 
-        void SetSize() { }
-        void GetSize() { }
-
         internal Board(IBoard Strategy)
         {
             this.Strategy = Strategy; //example: Strategy = new Square();

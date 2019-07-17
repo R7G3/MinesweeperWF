@@ -1,16 +1,16 @@
 ﻿namespace MinesweeperWF.Minesweeper
 {
-    public static class Settings
+    internal static class Settings
     {
-        public enum TypeOfBoard
+        internal enum TypeOfBoard
         {
             Square
         }
 
-        public static int X = 10;
-        public static int Y = 10;
-        public static int CountOfBombs = 15;
-        public static int ButtonSize = 25;
-        public static TypeOfBoard BoardType = TypeOfBoard.Square;
+        internal static int X = 10;
+        internal static int Y = 10;
+        internal static int CountOfBombs = 15;
+        internal static int ButtonSize = 25;
+        internal static TypeOfBoard BoardType = TypeOfBoard.Square;
     }
 }

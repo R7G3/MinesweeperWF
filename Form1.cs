@@ -13,9 +13,9 @@ using MinesweeperWF.Minesweeper.Boards;
 
 namespace MinesweeperWF
 {
-    public partial class Form1 : Form
+    internal partial class Form1 : Form
     {
-        public Form1()
+        internal Form1()
         {
             InitializeComponent();
         }
@@ -128,8 +128,8 @@ namespace MinesweeperWF
             {
                 Cell cell = game.mineField.board[coordX, coordY];
                 MessageBox.Show(
-                    "DEBUG!\n\nState: \t\t"  + cell.state.ToString()
-                    + "\nValue: \t\t"        + cell.value.ToString()
+                    "DEBUG!\n\nState: \t\t"  + cell.GetState().ToString()
+                    + "\nValue: \t\t"        + cell.GetValue().ToString()
                     + "\nNeighb. bombs: \t"  + cell.CountOfNeighboringBombs.ToString()
                     + "\nCoords: \t\t"       + cell.X + ", " + cell.Y
                 );

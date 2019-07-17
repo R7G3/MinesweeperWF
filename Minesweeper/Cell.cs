@@ -1,48 +1,48 @@
 ﻿namespace MinesweeperWF
 {
-    public enum State
+    internal enum State
     {
         Opened,
         Closed,
         Flagged
     }
 
-    public enum Value
+    internal enum Value
     {
         Bomb,
         Number,
         Empty
     }
 
-    class Cell
+    internal class Cell
     {
-        public int X;
-        public int Y;
-        public State state;
-        public Value value;
-        public int CountOfNeighboringBombs = 0;
+        internal int X;
+        internal int Y;
+        private State state;
+        private Value value;
+        internal int CountOfNeighboringBombs = 0;
 
-        public void SetState(State state)
+        internal void SetState(State state)
         {
             this.state = state;
         }
 
-        public State GetState()
+        internal State GetState()
         {
             return state;
         }
 
-        public void SetValue(Value value)
+        internal void SetValue(Value value)
         {
             this.value = value;
         }
 
-        public Value GetValue()
+        internal Value GetValue()
         {
             return value;
         }
 
-        public Cell(int x, int y)
+        internal Cell(int x, int y)
         {
             X = x;
             Y = y;

@@ -4,13 +4,13 @@ using MinesweeperWF.Minesweeper.Boards;
 
 namespace MinesweeperWF
 {
-    public class Game
+    internal class Game
     {
         internal Board mineField;
         internal bool isGameOver;
         internal bool isWin;
 
-        public Game()
+        internal Game()
         {
             isGameOver = false;
             isWin = false;
@@ -21,7 +21,7 @@ namespace MinesweeperWF
             }
         }
 
-        public void Open(int coordX, int coordY)
+        internal void Open(int coordX, int coordY)
         {
             Cell clickedCell = mineField.board[coordX, coordY];
             State cellState = clickedCell.GetState();
@@ -79,7 +79,7 @@ namespace MinesweeperWF
             }
         }
 
-        public void SetFlag(int x, int y)
+        internal void SetFlag(int x, int y)
         {
             Cell cell = mineField.board[x, y];
             if (cell.GetState() == State.Flagged)
@@ -92,7 +92,7 @@ namespace MinesweeperWF
             }
         }
 
-        public bool CheckWin()
+        internal bool CheckWin()
         {
             Cell[,] board = mineField.board;
             int size = board.GetLength(0) * board.GetLength(1);
