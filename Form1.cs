@@ -134,15 +134,12 @@ namespace MinesweeperWF
 
         private void WinLooseVerification()
         {
-            if (game.CheckWin())
+            bool endGame = game.CheckWin() || game.isGameOver;
+            if (endGame)
             {
-                MessageBox.Show("You win!");
                 BlockGameButtons();
-            }
-            if (game.isGameOver)
-            {
-                MessageBox.Show("You loose!");
-                BlockGameButtons();
+                string message = game.isGameOver ? "You loose!" : "You win!";
+                MessageBox.Show(message);
             }
         }
 
