@@ -17,6 +17,6 @@ namespace MinesweeperWF.Minesweeper
         public static int Y = 10;
         public static int CountOfBombs = 15;
         public static int ButtonSize = 25;
-        public static TypeOfBoard Type = TypeOfBoard.Square;
+        public static TypeOfBoard BoardType = TypeOfBoard.Square;
     }
 }

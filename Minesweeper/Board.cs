@@ -4,42 +4,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MinesweeperWF.Minesweeper;
 
 namespace MinesweeperWF.Minesweeper
 {
     class Board : IBoard
     {
-        private IBoard BoardType { get; set; }
-        //public static Coordinates Size;
-        public Cell[,] board = new Cell[10, 10];// = new Cell[Size.Y, Size.X];
-        //public int countOfBombs;
+        private IBoard Strategy { get; set; }
+        public Cell[,] board;
 
         void SetSize() { }
         void GetSize() { }
 
-        internal Board(IBoard boardType)
+        internal Board(IBoard Strategy)
         {
-            BoardType = boardType; //example: Strategy = new Square();
+            this.Strategy = Strategy; //example: Strategy = new Square();
+            board = new Cell[Settings.X, Settings.Y];
         }
 
         public List<Cell> GetNeighboringCells(Cell cell, Cell[,] board)
         {
-            return BoardType.GetNeighboringCells(cell, board);
-        }
-
-        public void OpenCells(List<Cell> cells)
-        {
-            BoardType.OpenCells(cells);
+            return Strategy.GetNeighboringCells(cell, board);
         }
 
         public void Fill(int Y, int X, Cell[,] board, int countOfBombs)
         {
-            BoardType.Fill(Y, X, board, countOfBombs); //TODO: , int countOfBombs
-        }
-
-        public Control[] CellsboardToControls(Cell[,] board)
-        {
-            return BoardType.CellsboardToControls(board);
+            Strategy.Fill(Y, X, board, countOfBombs);
         }
     }
 }
