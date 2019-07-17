@@ -32,26 +32,26 @@ namespace MinesweeperWF
                 isGameOver = true;
                 clickedCell.SetState(State.Opened);
             }
-            else
+            else if (cellValue == Value.Number)
             {
-                if (cellState == State.Closed && cellValue == Value.Number)
+                if (cellState == State.Closed)
                 {
                     clickedCell.SetState(State.Opened);
                 }
-                else if (cellState == State.Opened && cellValue == Value.Number)
+                else if (cellState == State.Opened)
                 {
                     ClickedOnNumberBesideFlags(clickedCell, mineField.board);
                 }
-                else if (cellValue == Value.Empty)
+            }
+            else if (cellValue == Value.Empty)
+            {
+                clickedCell.SetState(State.Opened);
+                List<Cell> neighbouringCells = mineField.GetNeighboringCells(clickedCell, mineField.board);
+                foreach (Cell cell in neighbouringCells)
                 {
-                    clickedCell.SetState(State.Opened);
-                    List<Cell> neighbouringCells = mineField.GetNeighboringCells(clickedCell, mineField.board);
-                    foreach (Cell cell in neighbouringCells)
+                    if (cell.GetValue() != Value.Bomb)
                     {
-                        if (cell.GetValue() != Value.Bomb)
-                        {
-                            cell.SetState(State.Opened);
-                        }
+                        cell.SetState(State.Opened);
                     }
                 }
             }
