@@ -61,7 +61,7 @@ namespace MinesweeperWF
 
         private void UpdateButton(int index, Cell cell)
         {
-            var button = buttons[index];
+            GameButton button = buttons[index];
             if (cell.GetState() == State.Flagged)
             {
                 buttons[index].Text = "F";

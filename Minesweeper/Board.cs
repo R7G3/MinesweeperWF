@@ -9,7 +9,7 @@ namespace MinesweeperWF.Minesweeper
 
         internal Board(IBoard Strategy)
         {
-            this.Strategy = Strategy; //example: Strategy = new Square();
+            this.Strategy = Strategy;
             board = new Cell[Settings.X, Settings.Y];
         }
 

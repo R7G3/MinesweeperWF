@@ -48,10 +48,9 @@ namespace MinesweeperWF
                     List<Cell> neighbouringCells = mineField.GetNeighboringCells(clickedCell, mineField.board);
                     foreach (Cell cell in neighbouringCells)
                     {
-                        if (cell.GetValue() != Value.Bomb)// && cell.GetValue() != Value.Number)
+                        if (cell.GetValue() != Value.Bomb)
                         {
                             cell.SetState(State.Opened);
-                            //Open(cell.Y, cell.X);
                         }
                     }
                 }
@@ -62,7 +61,6 @@ namespace MinesweeperWF
         {
             List<Cell> neighbouringCells = mineField.GetNeighboringCells(clickedCell, mineField.board);
             List<Cell> flaggedCells = new List<Cell>();
-            //Cell flagged = neighbouringCells.Single(c => c.GetState() == State.Flagged); if (flagged != null){}
             foreach (Cell cell in neighbouringCells)
             {
                 if (cell.GetState() == State.Flagged)
@@ -74,7 +72,14 @@ namespace MinesweeperWF
             {
                 foreach (Cell cell in neighbouringCells)
                 {
-                    Open(cell.X, cell.Y);
+                    if (cell.GetState() != State.Flagged)
+                    {
+                        cell.SetState(State.Opened);
+                        if (cell.GetValue() == Value.Bomb)
+                        {
+                            isGameOver = true;
+                        }
+                    }
                 }
             }
         }

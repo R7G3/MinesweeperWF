@@ -49,7 +49,7 @@ namespace MinesweeperWF.Minesweeper.Boards
 
         private bool isValidCoordinates(Cell[,] board, int biasY, int biasX)
         {
-            if (biasY >= 0 && biasY < board.GetLength(1)) //0 is Y or X, if arr[Y,X]?
+            if (biasY >= 0 && biasY < board.GetLength(1))
             {
                 if (biasX >= 0 && biasX < board.GetLength(0))
                 {
@@ -69,8 +69,7 @@ namespace MinesweeperWF.Minesweeper.Boards
             int biasX; //bias - смещённый
             int biasY;
 
-            //то что дальше вынести в функцию, повторять с radius++ пока не вернётся пустой список
-
+            //TODO: модумать, можно ли как-то это упростить:
             //Left
             biasX = X - radius;
             biasY = Y;
