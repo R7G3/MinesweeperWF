@@ -43,7 +43,7 @@ namespace MinesweeperWF
                     ClickedOnNumberBesideFlags(clickedCell, mineField.board);
                 }
             }
-            else if (cellValue == Value.Empty) //TODO: почему-то открывает не все
+            else if (cellValue == Value.Empty) //TODO: открывает не все
             {
                 clickedCell.SetState(State.Opened);
                 List<Cell> neighbouringCells = mineField.GetNeighboringCells(clickedCell, mineField.board);
