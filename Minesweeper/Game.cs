@@ -27,33 +27,35 @@ namespace MinesweeperWF
             State cellState = clickedCell.GetState();
             Value cellValue = clickedCell.GetValue();
 
-            if (cellValue == Value.Bomb)
+            switch (cellValue)
             {
-                isGameOver = true;
-                clickedCell.SetState(State.Opened);
-            }
-            else if (cellValue == Value.Number)
-            {
-                if (cellState == State.Closed)
-                {
+                case Value.Bomb:
+                    isGameOver = true;
                     clickedCell.SetState(State.Opened);
-                }
-                else if (cellState == State.Opened)
-                {
-                    ClickedOnNumberBesideFlags(clickedCell, mineField.board);
-                }
-            }
-            else if (cellValue == Value.Empty) //TODO: открывает не все
-            {
-                clickedCell.SetState(State.Opened);
-                List<Cell> neighbouringCells = mineField.GetNeighboringCells(clickedCell, mineField.board);
-                foreach (Cell cell in neighbouringCells)
-                {
-                    if (cell.GetValue() != Value.Bomb)
+                    break;
+
+                case Value.Number:
+                    if (cellState == State.Closed)
                     {
-                        cell.SetState(State.Opened);
+                        clickedCell.SetState(State.Opened);
                     }
-                }
+                    else if (cellState == State.Opened)
+                    {
+                        ClickedOnNumberBesideFlags(clickedCell, mineField.board);
+                    }
+                    break;
+
+                case Value.Empty:
+                    clickedCell.SetState(State.Opened);
+                    List<Cell> neighbouringCells = mineField.GetNeighboringCells(clickedCell, mineField.board);
+                    foreach (Cell cell in neighbouringCells)
+                    {
+                        if (cell.GetValue() != Value.Bomb)
+                        {
+                            cell.SetState(State.Opened);
+                        }
+                    }
+                    break;
             }
         }
 

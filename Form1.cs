@@ -54,44 +54,47 @@ namespace MinesweeperWF
                 for (int coordX = 0; coordX < board.GetLength(1); coordX++)
                 {
                     int index = coordY * Settings.Y + coordX;
-                    UpdateButton(index, board[coordX, coordY]);
+                    UpdateButton(buttons[index], board[coordX, coordY]);
                 }
             }
         }
 
-        private void UpdateButton(int index, Cell cell)
+        private void UpdateButton(Button button, Cell cell)
         {
-            GameButton button = buttons[index];
-            if (cell.GetState() == State.Flagged)
+            switch (cell.GetState())
             {
-                buttons[index].Text = "F";
-                buttons[index].ForeColor = Color.Red;
-                buttons[index].Font = new Font(buttons[index].Font, FontStyle.Bold);
-            }
-            else if (cell.GetState() == State.Closed)
-            {
-                buttons[index].Text = " ";
-            }
-            else if (cell.GetState() == State.Opened)
-            {
-                if (cell.GetValue() == Value.Empty)
-                {
-                    buttons[index].Text = " ";
-                    buttons[index].FlatStyle = FlatStyle.Flat;
-                    buttons[index].FlatAppearance.BorderSize = 0;
-                    buttons[index].Enabled = false;
-                }
-                else if (cell.GetValue() == Value.Number)
-                {
-                    buttons[index].Text = cell.CountOfNeighboringBombs.ToString();
-                    buttons[index].FlatStyle = FlatStyle.Flat;
-                }
-                else if (cell.GetValue() == Value.Bomb)
-                {
-                    buttons[index].Text = "☼";
-                    buttons[index].Font = new Font(buttons[index].Font, FontStyle.Bold);
-                    buttons[index].BackColor = Color.Red;
-                }
+                case State.Flagged:
+                    button.Text = "F";
+                    button.ForeColor = Color.Red;
+                    button.Font = new Font(button.Font, FontStyle.Bold);
+                    break;
+
+                case State.Closed:
+                    button.Text = " ";
+                    break;
+
+                case State.Opened:
+                    switch (cell.GetValue())
+                    {
+                        case Value.Empty:
+                            button.Text = " ";
+                            button.FlatStyle = FlatStyle.Flat;
+                            button.FlatAppearance.BorderSize = 0;
+                            button.Enabled = false;
+                            break;
+
+                        case Value.Number:
+                            button.Text = cell.CountOfNeighboringBombs.ToString();
+                            button.FlatStyle = FlatStyle.Flat;
+                            break;
+
+                        case Value.Bomb:
+                            button.Text = "☼";
+                            button.Font = new Font(button.Font, FontStyle.Bold);
+                            button.BackColor = Color.Red;
+                            break;
+                    }
+                    break;
             }
         }
 
@@ -110,7 +113,7 @@ namespace MinesweeperWF
                 game.SetFlag(coordX, coordY);
                 int index = coordY * Settings.Y + coordX;
                 Cell cell = game.mineField.board[coordX, coordY];
-                UpdateButton(index, cell);
+                UpdateButton(buttons[index], cell);
             }
             else if (e.Button == MouseButtons.Middle)
             {
