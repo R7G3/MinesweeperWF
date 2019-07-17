@@ -35,8 +35,8 @@ namespace MinesweeperWF
             
         }
         
-        internal GameButton[] buttons = new GameButton[Settings.X * Settings.Y];
-        internal Game game;
+        private GameButton[] buttons = new GameButton[Settings.X * Settings.Y];
+        private Game game;
 
         private void NewGameButton_Click(object sender, EventArgs e)
         {
