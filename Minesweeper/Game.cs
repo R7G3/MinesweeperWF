@@ -111,7 +111,7 @@ namespace MinesweeperWF
         }
 
         private void OpenEmptyArea(Cell clickedCell)
-        {//
+        {
             HashSet<Cell> whatsNeedOpen = new HashSet<Cell>();
             HashSet<Cell> firstGen = new HashSet<Cell>();
             HashSet<Cell> secondGen = new HashSet<Cell>();
