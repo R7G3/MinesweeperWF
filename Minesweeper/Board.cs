@@ -13,7 +13,7 @@ namespace MinesweeperWF.Minesweeper
             board = new Cell[Settings.X, Settings.Y];
         }
 
-        public List<Cell> GetNeighboringCells(Cell cell, Cell[,] board)
+        public HashSet<Cell> GetNeighboringCells(Cell cell, Cell[,] board)
         {
             return Strategy.GetNeighboringCells(cell, board);
         }

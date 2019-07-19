@@ -33,7 +33,7 @@ namespace MinesweeperWF.Minesweeper.Boards
                     board[y, x].SetValue(Value.Bomb);
                     board[y, x].SetState(State.Closed);
                     i++;
-                    List<Cell> cells = GetNeighboringCells(board[y, x], board);
+                    HashSet<Cell> cells = GetNeighboringCells(board[y, x], board);
                     cellsNeighboringBombs.AddRange(cells);
                 }
             }
@@ -59,11 +59,11 @@ namespace MinesweeperWF.Minesweeper.Boards
             return false;
         }
 
-        public List<Cell> GetNeighboringCells(Cell clickedCell, Cell[,] board)
+        public HashSet<Cell> GetNeighboringCells(Cell clickedCell, Cell[,] board)
         {
             int Y = clickedCell.Y;
             int X = clickedCell.X;
-            List<Cell> NeighboringCells = new List<Cell>();
+            HashSet<Cell> NeighboringCells = new HashSet<Cell>();
 
             int radius = 1;
             int biasX; //bias - смещённый

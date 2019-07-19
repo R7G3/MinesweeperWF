@@ -47,21 +47,14 @@ namespace MinesweeperWF
 
                 case Value.Empty:
                     clickedCell.SetState(State.Opened);
-                    List<Cell> neighbouringCells = mineField.GetNeighboringCells(clickedCell, mineField.board);
-                    foreach (Cell cell in neighbouringCells)
-                    {
-                        if (cell.GetValue() != Value.Bomb)
-                        {
-                            cell.SetState(State.Opened);
-                        }
-                    }
+                    OpenEmptyArea(clickedCell);
                     break;
             }
         }
-
+        
         private void ClickedOnNumberBesideFlags(Cell clickedCell, Cell[,] board)
         {
-            List<Cell> neighbouringCells = mineField.GetNeighboringCells(clickedCell, mineField.board);
+            HashSet<Cell> neighbouringCells = mineField.GetNeighboringCells(clickedCell, mineField.board);
             List<Cell> flaggedCells = new List<Cell>();
             foreach (Cell cell in neighbouringCells)
             {
@@ -115,6 +108,67 @@ namespace MinesweeperWF
                 }
             }
             return closed == Settings.CountOfBombs ? true : false;
+        }
+
+        private void OpenEmptyArea(Cell clickedCell)
+        {
+            HashSet<Cell> whatsNeedOpen = new HashSet<Cell>();
+            HashSet<Cell> firstGen = new HashSet<Cell>();
+            HashSet<Cell> secondGen = new HashSet<Cell>();
+            firstGen = mineField.GetNeighboringCells(clickedCell, mineField.board);
+
+            bool isHaveMoreNeighbours = false;
+            do
+            {
+                isHaveMoreNeighbours = false;
+                List<Cell> notFiltered = new List<Cell>();
+                foreach (Cell c in firstGen)
+                {
+                    notFiltered.AddRange(mineField.GetNeighboringCells(c, mineField.board));
+                }
+
+                List<Cell> filtered = new List<Cell>();
+                foreach (Cell c in notFiltered)
+                {
+                    if (c.GetState() == State.Closed && (c.GetValue() == Value.Empty || c.GetValue() == Value.Number))
+                    {
+                        if (c.GetValue() == Value.Number)
+                        {
+                            c.SetState(State.Opened);
+                        }
+                        else
+                        {
+                            filtered.Add(c);
+                        }
+                    }
+                }
+
+                foreach (Cell f in filtered)
+                {
+                    if (!whatsNeedOpen.Contains(f))
+                    {
+                        secondGen.Add(f);
+                        isHaveMoreNeighbours = true;
+                    }
+                }
+
+                foreach (Cell c in firstGen)
+                {
+                    whatsNeedOpen.Add(c);
+                }
+
+                firstGen.Clear();
+
+                foreach (Cell c in secondGen)
+                {
+                    firstGen.Add(c);
+                }
+            } while (isHaveMoreNeighbours);
+
+            foreach (Cell c in whatsNeedOpen)
+            {
+                c.SetState(State.Opened);
+            }
         }
     }
 }
