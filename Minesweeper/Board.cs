@@ -3,7 +3,7 @@
 namespace MinesweeperWF.Minesweeper
 {
     class Board : IBoard
-    {
+    {//
         private IBoard Strategy { get; set; }
         public Cell[,] board;
 

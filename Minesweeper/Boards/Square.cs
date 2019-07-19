@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace MinesweeperWF.Minesweeper.Boards
 {
     class Square : IBoard
-    {
+    {//
         public void Fill(Cell[,] board)
         {
             for (int cols = 0; cols < Settings.Y; cols++)
