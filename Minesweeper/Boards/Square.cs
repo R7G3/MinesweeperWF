@@ -61,77 +61,22 @@ namespace MinesweeperWF.Minesweeper.Boards
 
         public HashSet<Cell> GetNeighboringCells(Cell clickedCell, Cell[,] board)
         {
-            int Y = clickedCell.Y;
-            int X = clickedCell.X;
             HashSet<Cell> NeighboringCells = new HashSet<Cell>();
+            int clickedY = clickedCell.Y;
+            int clickedX = clickedCell.X;
 
-            int radius = 1;
-            int biasX; //bias - смещённый
-            int biasY;
-
-            //TODO: подумать, можно ли как-то это упростить:
-            //Left
-            biasX = X - radius;
-            biasY = Y;
-            if (isValidCoordinates(board, biasY, biasX))
+            for (int y = clickedY - 1; y <= clickedY + 1; y++) 
             {
-                NeighboringCells.Add(board[biasY, biasX]);
-            }
-
-            //Left-Up
-            biasX = X - radius;
-            biasY = Y - radius;
-            if (isValidCoordinates(board, biasY, biasX))
-            {
-                NeighboringCells.Add(board[biasY, biasX]);
-            }
-
-            //Up
-            biasX = X;
-            biasY = Y - radius;
-            if (isValidCoordinates(board, biasY, biasX))
-            {
-                NeighboringCells.Add(board[biasY, biasX]);
-            }
-
-            //Right-Up
-            biasX = X + radius;
-            biasY = Y - radius;
-            if (isValidCoordinates(board, biasY, biasX))
-            {
-                NeighboringCells.Add(board[biasY, biasX]);
-            }
-
-            //Right
-            biasX = X + radius;
-            biasY = Y;
-            if (isValidCoordinates(board, biasY, biasX))
-            {
-                NeighboringCells.Add(board[biasY, biasX]);
-            }
-
-            //Right-Down
-            biasX = X + radius;
-            biasY = Y + radius;
-            if (isValidCoordinates(board, biasY, biasX))
-            {
-                NeighboringCells.Add(board[biasY, biasX]);
-            }
-
-            //Down
-            biasX = X;
-            biasY = Y + radius;
-            if (isValidCoordinates(board, biasY, biasX))
-            {
-                NeighboringCells.Add(board[biasY, biasX]);
-            }
-
-            //Left-Down
-            biasX = X - radius;
-            biasY = Y + radius;
-            if (isValidCoordinates(board, biasY, biasX))
-            {
-                NeighboringCells.Add(board[biasY, biasX]);
+                for (int x = clickedX - 1; x <= clickedX + 1; x++)
+                {
+                    if (isValidCoordinates(board, y, x))
+                    {
+                        if ((x != clickedX) || (y != clickedY))
+                        {
+                            NeighboringCells.Add(board[y, x]);
+                        }
+                    }
+                }
             }
 
             return NeighboringCells;
